@@ -1,6 +1,9 @@
 <!-- pixeltable-example-app: 20260929-invoice-audit -->
 # Invoice Audit API built with Pixeltable
 
+![Invoice Audit API built with Pixeltable](.github/social-preview.png)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/pierrebrunelle/pixeltable-invoice-audit?quickstart=1)
 [![Built with Pixeltable](https://img.shields.io/badge/built%20with-Pixeltable-5b4bff)](https://pixeltable.com)
 [![PyPI - pixeltable](https://img.shields.io/pypi/v/pixeltable?label=pixeltable)](https://pypi.org/project/pixeltable/)
 [![GitHub stars](https://img.shields.io/github/stars/pixeltable/pixeltable?style=social)](https://github.com/pixeltable/pixeltable)
@@ -37,6 +40,9 @@ Update a line's `discount_pct` and Pixeltable recomputes `net`, `tax`, `total`, 
 
 | File | What it is |
 |------|------------|
+| `.devcontainer/devcontainer.json` | GitHub Codespaces / Dev Container config: Python 3.12, installs `requirements.txt`, forwards port 8000 |
+| `.github/social-preview.png` | Social preview image (1280x640) |
+| `CITATION.cff` | Citation metadata (authors, license, release date, keywords) |
 | `app.py` | The app: tables declared as Python classes, `@pxt.query` functions, and the `FastAPIRouter` routes |
 | `client_demo.py` | Score a line, record it, adjust its discount and list flagged lines through the API |
 | `pixeltable.toml` | Project config: the local database plus a Pixeltable Cloud database (sizing, deploy excludes) |
@@ -60,6 +66,23 @@ Update a line's `discount_pct` and Pixeltable recomputes `net`, `tax`, `total`, 
 | `POST` | `/vendors` | insert | `Vendors` |  |
 | `POST` | `/risk` | compute | `LineItems` |  |
 | `GET` | `/flagged` | query | `flagged` |  |
+
+## Run in your browser (GitHub Codespaces)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/pierrebrunelle/pixeltable-invoice-audit?quickstart=1)
+
+1. Click **Open in GitHub Codespaces** above (or [this link](https://codespaces.new/pierrebrunelle/pixeltable-invoice-audit?quickstart=1)). The dev container installs Python 3.12 and `pixeltable[serve]>=0.7.14` from `requirements.txt`.
+2. In the codespace terminal, create the tables, seed them and start the API:
+
+   ```bash
+   pxt schema update app.py audit
+   python seed.py audit
+   pxt service run app.py audit --port 8000   # open http://localhost:8000/docs
+   python client_demo.py                     # in another terminal
+   pxt computed audit/line_items             # every computed column and its expression
+   ```
+
+3. Codespaces forwards port 8000: open it from the **Ports** tab (or the pop-up) and add `/docs` to the URL for the interactive OpenAPI docs.
 
 ## Quickstart
 
@@ -179,6 +202,9 @@ audit.add_query_route(path='/flagged', query=flagged, method='get')
 - 📚 Docs: https://docs.pixeltable.com
 - 💻 Source: https://github.com/pixeltable/pixeltable (⭐ star it if Pixeltable is useful to you)
 - 📦 PyPI: https://pypi.org/project/pixeltable/
+- 🧩 More example apps: https://pierrebrunelle.github.io/awesome-pixeltable-apps/
+
+**[More Pixeltable example apps →](https://pierrebrunelle.github.io/awesome-pixeltable-apps/)**
 
 ---
 
